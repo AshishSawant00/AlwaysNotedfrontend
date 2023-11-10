@@ -1,0 +1,61 @@
+<div class="container p-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card paint-card">
+          <div class="card-body">
+            <p class="fs-4 text-center">View Profile</p>
+  
+            <div class="form-group mt-2">
+              <label>Name</label>
+              <input type="text" [(ngModel)]="user.name" class="form-control" readonly required name="name">
+            </div>
+  
+            <div class="form-group mt-2">
+              <label>Email</label>
+              <input type="email" [(ngModel)]="user.email" class="form-control" readonly required name="email">
+            </div>
+  
+            <div class="form-group mt-2">
+              <textarea rows="3" [(ngModel)]="user.about" class="form-control" readonly placeholder="Enter About" name="about"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="card paint-card">
+          <div class="card-body">
+            <form (ngSubmit)="updateUser()">
+              <p class="fs-4 text-center">Edit Profile</p>
+  
+              <div *ngIf="sessionMsg" class="text-center" role="alert">
+                <h4 class="text-success">{{ sessionMsg }}</h4>
+              </div>
+  
+              <div class="form-group mt-2">
+                <label>Enter Name</label>
+                <input type="text" [(ngModel)]="user.name" class="form-control" required name="newName">
+              </div>
+  
+              <div class="form-group mt-2">
+                <label>Enter Email</label>
+                <input type="email" [(ngModel)]="user.email" class="form-control" readonly required name="newEmail">
+              </div>
+  
+              <div class="form-group mt-2">
+                <textarea rows="3" [(ngModel)]="user.about" class="form-control" placeholder="Enter About" name="newAbout"></textarea>
+              </div>
+  
+              <input type="hidden" [(ngModel)]="user.id" name="userId">
+  
+              <div class="text-center mt-3 button-container">
+                <button type="submit" class="btn bg-primary text-white">Update</button>&nbsp;
+                <button type="reset" class="btn btn-primary text-white">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

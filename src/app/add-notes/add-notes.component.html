@@ -1,0 +1,27 @@
+<section>
+    <div class="container-fluid p-3">
+        <div class="col-md-10 offset-md-1">
+            <div class="card paint-card">
+                <h3 class="text-center">Add Notes</h3>
+                <div class="card-body">
+                    <form  (ngSubmit)="submitAddNotes()">
+                        <div class="form-group">
+                            <label>Enter Title</label>
+                            <input type="text" placeholder="Add Title" [(ngModel)]="notes.title" class="form-control" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label>Enter Description</label>
+                            <textarea rows="12" cols="" placeholder="Add Description Of Your Note" [(ngModel)]="notes.content" name="content" class="form-control"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                        <div class="text-center">
+                            {{addMsg}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

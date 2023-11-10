@@ -1,0 +1,24 @@
+<div>
+    <div>
+
+        <app-header></app-header>
+    </div>
+    <div>
+        <section>
+	
+            <div *ngIf="!loginClicked" class="backimg">
+                <div  *ngIf="!loginClicked" class="text-white text-center"  >
+                    <h1>ENotes- Save Notes</h1>
+                    <p>Start Collecting your Notes in very smarter way .We provied
+                        very difficult and smarter way of handling Notes</p>
+                    <button  (click)="login()" class="btn bg-primary text-white" routerLink="/login">Get Start</button>
+                </div>
+            </div>
+    
+        </section>
+    </div>
+    <div>
+        <router-outlet ></router-outlet>
+    </div>
+
+</div>

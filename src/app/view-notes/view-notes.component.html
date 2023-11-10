@@ -1,0 +1,62 @@
+
+
+  <section>
+    <div class="container">
+      <h3 class="text-center">Notes</h3>
+      <!-- Replace session.msg with an Angular variable -->
+      <div *ngIf="sessionMsg" class="text-center" role="alert">
+        <h4>{{ sessionMsg }}</h4>
+        <!-- #session.removeAttribute('msg') is not applicable in Angular -->
+      </div>
+
+      <div class="col-md-12 mt-3" *ngFor="let n of notes, let i = index">
+        <div class="card paint-card">
+          <div class="card-body">
+            <div class="text-center">
+              <!-- Replace Thymeleaf image source with Angular image source -->
+              <img alt="" [src]="'/img/pp.jpg'" style="width: 50px; height: 50px;">
+            </div>
+
+            <h5>{{ n.title }}</h5>
+            <p>
+              {{ n.content }} <br> 
+              <!-- <br> <span class="font-weight-bold">Upload Date :</span> {{ n.updateDate }} -->
+            </p>
+            <div class="text-center">
+              <!-- Use Angular routing to navigate -->
+              <a   (click)="updateNote(n.noteId, n.title,i)" class="btn btn-primary btn-sm">Edit</a>
+              <a   (click)="deleteNote(n.noteId)" onclick="return confirm('Are you sure you want to delete this Note?');" class="btn btn-danger btn-sm ml-2">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- 
+      <div class="row p-4">
+        <div class="col-md-4">Total Elements: {{ totalElement }}</div>
+        <div class="col-md-6">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              Replace Thymeleaf pagination logic with Angular pagination logic 
+              <li [class.disabled]="pageNo === 0" class="page-item">
+                <a class="page-link" routerLink="'/user/viewNotes/' + (pageNo - 1)" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li *ngFor="let i of totalPages" [class.active]="pageNo + 1 === i" class="page-item">
+                <a class="page-link" routerLink="'/user/viewNotes/' + (i - 1)" href="#">{{ i }}</a>
+              </li>
+              <li [class.disabled]="pageNo + 1 === totalPage" class="page-item">
+                <a class="page-link" routerLink="'/user/viewNotes/' + (pageNo + 1)" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    -->
+    </div>
+  
+
+  </section>
+
