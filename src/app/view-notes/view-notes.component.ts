@@ -43,6 +43,12 @@ export class ViewNotesComponent implements OnInit {
     })
   }
 
+  showFullContent: boolean[] = [];
+
+  toggleContent(index: number) {
+    this.showFullContent[index] = !this.showFullContent[index];
+  }
+
   updateNote(noteId:any, noteTitle:string, i: number){
    noteId=this.notes[i].noteId;
 
