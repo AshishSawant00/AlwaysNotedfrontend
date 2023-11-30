@@ -10,9 +10,9 @@ import { Notes } from '../model/Notes';
   providedIn: 'root'
 })
 export class DataServiceService {
-  
+
   private userUrl: string;
-  
+
   private nameSource = new BehaviorSubject<string>('');
   currentName = this.nameSource.asObservable();
 
@@ -23,14 +23,14 @@ export class DataServiceService {
   private uuid = new BehaviorSubject<string>('');
   currentUuid = this.uuid.asObservable();
 
-  setUuid(uuid:string){
+  setUuid(uuid: string) {
     this.uuid.next(uuid);
   }
 
   private id = new BehaviorSubject<number>(0);
   currentId = this.id.asObservable();
 
-  setId(id:number){
+  setId(id: number) {
     this.id.next(id);
   }
 
@@ -38,15 +38,25 @@ export class DataServiceService {
   private noteId = new BehaviorSubject<number>(0);
   currentNoteId = this.noteId.asObservable();
 
-  setNoteId(id:number){
+  setNoteId(id: number) {
     this.noteId.next(id);
   }
 
 
 
 
-  constructor( private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.userUrl = 'http://localhost:8080/always-noted'
+  }
+
+  saveNotesAsPdf(notes: Notes[]): Observable<Blob> {
+
+    return this.http.post(this.userUrl + "/api/notes/pdf", notes, {
+
+      responseType: 'blob',
+
+    });
+
   }
 
   login(username: string, password: string): Observable<any> {
@@ -54,8 +64,8 @@ export class DataServiceService {
       username: username,
       password: password,
     };
-    console.log("Inside login"+ loginData.username+"   "+ loginData.password);
-    
+    console.log("Inside login" + loginData.username + "   " + loginData.password);
+
 
     return this.http.post(`${this.userUrl}/login`, loginData);
   }
@@ -72,43 +82,43 @@ export class DataServiceService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    
+
     return this.http.post(`${this.userUrl}/signup`, signupData, { headers: headers });
   }
-  
-  viewNotes(id:number):Observable<any>{
-    
-    console.log("View Notes UUID : "+ id);
-    
 
-    return this.http.get(`${this.userUrl}/`+id);
+  viewNotes(id: number): Observable<any> {
+
+    console.log("View Notes UUID : " + id);
+
+
+    return this.http.get(`${this.userUrl}/` + id);
   }
 
-  saveNote(note:Notes):Observable<any>{
+  saveNote(note: Notes): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post(`${this.userUrl}/save-note`,note,  { responseType: 'text' });
+    return this.http.post(`${this.userUrl}/save-note`, note, { responseType: 'text' });
   }
 
 
-  updateNote(note: Notes):Observable<any> {
-    console.log("Inside update note  "+note.noteId);
-    
-    return this.http.put(`${this.userUrl}/note/`+note.noteId, note) 
+  updateNote(note: Notes): Observable<any> {
+    console.log("Inside update note  " + note.noteId);
+
+    return this.http.put(`${this.userUrl}/note/` + note.noteId, note)
   }
 
-  deleteNote(noteId:number):Observable<any> {
-    return this.http.delete(`${this.userUrl}/note/` +noteId, {responseType:'text'});
+  deleteNote(noteId: number): Observable<any> {
+    return this.http.delete(`${this.userUrl}/note/` + noteId, { responseType: 'text' });
   }
 
-  public home(): Observable<any[]>{
-    return 	this.http.get<any[]>(`${this.userUrl}`);
+  public home(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.userUrl}`);
   }
 
-  
- private actualLogInClicked = new BehaviorSubject<boolean>(false);
- actualLogInClicked$ = this.actualLogInClicked.asObservable();
+
+  private actualLogInClicked = new BehaviorSubject<boolean>(false);
+  actualLogInClicked$ = this.actualLogInClicked.asObservable();
 
   private signUpClicked = new BehaviorSubject<boolean>(false);
   signUpClicked$ = this.signUpClicked.asObservable();
@@ -124,11 +134,11 @@ export class DataServiceService {
     this.logInClicked.next(value);
   }
 
-  setActualLogInClicked(value:boolean){
+  setActualLogInClicked(value: boolean) {
     this.actualLogInClicked.next(value);
   }
 
-   sharedObject: Notes=new Notes();
+  sharedObject: Notes = new Notes();
   setSharedObject(data: Notes) {
     this.sharedObject = data;
   }
