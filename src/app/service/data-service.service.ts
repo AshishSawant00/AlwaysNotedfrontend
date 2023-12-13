@@ -49,7 +49,7 @@ export class DataServiceService {
     this.userUrl = 'http://localhost:8080/always-noted'
   }
 
-  saveNotesAsPdf(notes: Notes[]): Observable<Blob> {
+  saveNotesAsPdf(notes: Notes): Observable<Blob> {
 
     return this.http.post(this.userUrl + "/api/notes/pdf", notes, {
 
@@ -57,6 +57,11 @@ export class DataServiceService {
 
     });
 
+  }
+
+  addNoteToFeed(notes:Notes): Observable<any>{
+    console.log("Adding Note to feed "+notes.uuid);
+    return this.http.post(`${this.userUrl}/feed/`+notes.noteId,notes)
   }
 
   login(username: string, password: string): Observable<any> {

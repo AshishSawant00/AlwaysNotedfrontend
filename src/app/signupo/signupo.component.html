@@ -28,8 +28,10 @@
                 </div>
                 <div class="form-group mt-2">
                   <label>Enter Username</label>
-                  <input type="text" name="username" [(ngModel)]="user.username"  class="form-control" required>
+                  <input type="text" name="username" [(ngModel)]="user.username" class="form-control" (focus)="onInputFocus()" required>
+                  <div *ngIf="showMessage && !user.username" class="text-danger">Username is not empty</div>
                 </div>
+                
                 <div class="text-center mt-3">
                   <button class="btn bg-primary text-white" type="submit" style="margin-right: 10px;">Submit</button>
                   <button type="reset" class="btn btn-primary text-white">Reset</button>

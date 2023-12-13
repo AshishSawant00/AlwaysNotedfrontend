@@ -19,6 +19,9 @@
                 <li *ngIf="logIn && actualLogIn" class="nav-item"><a class="nav-link active"
                     aria-current="page" routerLink="/view-notes" >View Notes</a></li>
 
+                    <li *ngIf="logIn && actualLogIn" class="nav-item"><a class="nav-link active"
+                        aria-current="page" routerLink="/feed" >Feed</a></li>    
+
                 <li *ngIf="logIn && actualLogIn" class="nav-item"> <a class="nav-link active" [style.color]="yourColorVariable" > WelCome {{name}} </a></li>   
 
             </ul>

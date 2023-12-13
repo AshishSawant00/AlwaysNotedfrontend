@@ -20,6 +20,13 @@ import { DataServiceService } from '../service/data-service.service';
 
 export class SignupoComponent {
 
+  // user = { username: '' }; // Initial user object
+  showMessage = false; // Flag to control message visibility
+
+  onInputFocus() {
+    this.showMessage = true;
+  }
+
   user:User= new User();
 
   sessionMsg: string | null = null;

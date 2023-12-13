@@ -8,6 +8,7 @@ import { LoginoComponent } from './logino/logino.component';
 import { SignupoComponent } from './signupo/signupo.component';
 import { ViewNotesComponent } from './view-notes/view-notes.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { ViewallComponent } from './viewall/viewall.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
     path:'buttons',
     component: ButtonsComponent
   },
+  {
+    path: 'feed',
+    component: ViewallComponent
+  }
 ];
 
 @NgModule({

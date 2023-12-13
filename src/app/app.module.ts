@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { ViewallComponent } from './viewall/viewall.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ButtonsComponent } from './buttons/buttons.component';
     BaseComponent,
     AddNotesComponent,
     HeaderComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    ViewallComponent
   ],
   imports: [
     BrowserModule,

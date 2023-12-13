@@ -1,0 +1,7 @@
+/* Add this to your global styles or a component-specific style file */
+
+.description-textarea {
+    max-width: 100%; /* Set a maximum width for the textarea */
+    width: 100%; /* Ensure the width is 100% of the container */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}

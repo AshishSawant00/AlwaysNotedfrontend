@@ -1,4 +1,4 @@
-import { DataServiceService } from "../service/data-service.service";
+
 
 export class Notes {
 
@@ -6,6 +6,7 @@ export class Notes {
     title:string='';
     content:string='';
     uuid:string='';
+    toFeed:boolean= false;
    
    
 }

@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { DataServiceService } from '../service/data-service.service';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Notes } from '../model/Notes';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
-import { NotExpr } from '@angular/compiler';
-
+import { DataServiceService } from '../service/data-service.service';
 
 @Component({
-  selector: 'app-view-notes',
-  templateUrl: './view-notes.component.html',
-  styleUrls: ['./view-notes.component.css']
+  selector: 'app-viewall',
+  templateUrl: './viewall.component.html',
+  styleUrls: ['./viewall.component.css']
 })
-export class ViewNotesComponent implements OnInit {
+export class ViewallComponent {
 
   sessionMsg: string = ''; // Replace with your actual session message variable
   notes: Notes[] = []; // Replace with your notes array
@@ -79,44 +76,6 @@ export class ViewNotesComponent implements OnInit {
     this.showFullContent[index] = !this.showFullContent[index];
   }
 
-  updateNote(noteId: any, noteTitle: string, i: number) {
-    noteId = this.notes[i].noteId;
-
-    this.service.setNoteId(this.notes[i].noteId);
-    console.log("Id from update  " + this.notes[i].content + "  " + this.notes[i].noteId);
-
-    this.service.setSharedObject(this.notes[i]);
-
-    this.router.navigate(["/editNotes/" + this.notes[i].noteId])
-  }
-
-
-  confirmDelete(noteId: number): void {
-    if (confirm('Are you sure you want to delete this Note?')) {
-      this.deleteNote(noteId);
-    }
-  }
-
-
-  deleteNote(noteId: number) {
-
-    this.service.deleteNote(noteId).subscribe(e => {
-      this.deleteMsg = e;
-      console.log("Delete Msg - " + this.deleteMsg);
-      this.notes = this.notes.filter((note) => note.noteId !== noteId);
-      this.router.navigate(["/view-notes"]);
-    })
-
-
-  }
-
-  addNoteToFeed(i:number){
-    this.notes[i].toFeed = true;
-    this.service.addNoteToFeed(this.notes[i]).subscribe( e => {
-      console.log("Added Note to feed");      
-    }
-    )
-  }
 
 }
 

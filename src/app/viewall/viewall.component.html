@@ -1,0 +1,43 @@
+
+
+  <section>
+    <div class="container">
+      <!-- <h3 class="text-center">Notes</h3>
+       Replace session.msg with an Angular variable 
+      <div *ngIf="sessionMsg" class="text-center" role="alert">
+        <h4>{{ sessionMsg }}</h4>
+         #session.removeAttribute('msg') is not applicable in Angular 
+      </div> -->
+
+      <div class="col-md-12 mt-3" *ngFor="let n of notes, let i = index">
+        <div class="card paint-card">
+          <div class="card-body">
+            <div class="text-center">
+              <!-- Replace Thymeleaf image source with Angular image source -->
+              <img alt="" [src]="'/img/pp.jpg'" style="width: 50px; height: 50px;">
+            </div>
+
+            <h5>{{ n.title }}</h5>
+            <p>
+              {{ n.content.length > 100 ? (showFullContent[i] ? n.content : (n.content | slice:0:100) + '...') : n.content }}
+              <br>
+              <span *ngIf="n.content.length > 100">
+                <button (click)="toggleContent(i)" class="btn btn-primary btn-sm">
+                  {{ showFullContent[i] ? 'See Less' : 'See More' }}
+                </button>
+              </span>
+            </p>
+            <div class="text-center">
+              <!-- Use Angular routing to navigate -->
+              <!-- <a   (click)="updateNote(n.noteId, n.title,i)" class="btn btn-primary btn-sm">Edit</a>
+              <a   (click)="confirmDelete(n.noteId)" class="btn btn-danger btn-sm ml-2">Delete</a> -->
+              <a   (click)="saveNotesAsPdf(i)" class="btn btn-primary btn-sm">Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+  
+
+  </section>
+
