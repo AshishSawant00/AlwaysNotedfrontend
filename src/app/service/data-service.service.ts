@@ -59,9 +59,14 @@ export class DataServiceService {
 
   }
 
+  getNoteForFeed():Observable<any>{
+    console.log("Getting note for feed ");
+    return this.http.get(`${this.userUrl}/feed`);
+  }
+
   addNoteToFeed(notes:Notes): Observable<any>{
-    console.log("Adding Note to feed "+notes.uuid);
-    return this.http.post(`${this.userUrl}/feed/`+notes.noteId,notes)
+    console.log("Adding Note to feed "+notes.noteId);
+    return this.http.put(`${this.userUrl}/feed/`+notes.noteId,notes)
   }
 
   login(username: string, password: string): Observable<any> {
@@ -92,10 +97,7 @@ export class DataServiceService {
   }
 
   viewNotes(id: number): Observable<any> {
-
     console.log("View Notes UUID : " + id);
-
-
     return this.http.get(`${this.userUrl}/` + id);
   }
 

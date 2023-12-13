@@ -34,7 +34,7 @@ export class ViewallComponent {
 
   }
   ngOnInit(): void {
-    this.service.viewNotes(this.id).subscribe((n) => {
+    this.service.getNoteForFeed().subscribe((n) => {
       this.notes = n;
       console.log("Notes --" + n);
     })

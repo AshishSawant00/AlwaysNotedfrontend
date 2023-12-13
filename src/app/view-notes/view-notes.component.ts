@@ -112,6 +112,8 @@ export class ViewNotesComponent implements OnInit {
 
   addNoteToFeed(i:number){
     this.notes[i].toFeed = true;
+    console.log("Note  "+ this.notes[i].toFeed);
+    
     this.service.addNoteToFeed(this.notes[i]).subscribe( e => {
       console.log("Added Note to feed");      
     }
