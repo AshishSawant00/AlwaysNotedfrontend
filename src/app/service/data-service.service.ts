@@ -46,7 +46,9 @@ export class DataServiceService {
 
 
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://localhost:8080/always-noted'
+    // this.userUrl = 'http://localhost:8080/always-noted'
+    this.userUrl = 'http://16.171.5.124:8080/notes'
+
   }
 
   saveNotesAsPdf(notes: Notes): Observable<Blob> {
