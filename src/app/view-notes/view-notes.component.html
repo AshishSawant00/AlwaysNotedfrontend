@@ -1,69 +1,58 @@
+<section>
+  <div class="container">
+    <div class="text-right">
+      <button class="btn btn-outline-primary" (click)="toggleSearch()">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
 
+    <!-- The search bar (initially hidden) -->
+    <div class="search-bar" *ngIf="showSearchBar">
+      <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchQuery" />
+      <button class="btn btn-primary" (click)="performSearch()">Search</button>
+    </div>
+    <h3 class="text-center">Notes</h3>
 
-  <section>
-    <div class="container">
-      <h3 class="text-center">Notes</h3>
-      <!-- Replace session.msg with an Angular variable -->
-      <div *ngIf="sessionMsg" class="text-center" role="alert">
-        <h4>{{ sessionMsg }}</h4>
-        <!-- #session.removeAttribute('msg') is not applicable in Angular -->
-      </div>
+    <div *ngIf="sessionMsg" class="text-center" role="alert">
+      <h4>{{ sessionMsg }}</h4>
 
-      <div class="col-md-12 mt-3" *ngFor="let n of notes, let i = index">
-        <div class="card paint-card">
-          <div class="card-body">
-            <div class="text-center">
-               
-              <img alt="" [src]="'assets/img/n.png'" style="width: 50px; height: 50px;">
-            </div>
+    </div>f
 
-            <h5>{{ n.title }}</h5>
-            <p>
-              {{ n.content.length > 100 ? (showFullContent[i] ? n.content : (n.content | slice:0:100) + '...') : n.content }}
-              <br>
-              <span *ngIf="n.content.length > 100">
-                <button (click)="toggleContent(i)" class="btn btn-primary btn-sm">
-                  {{ showFullContent[i] ? 'See Less' : 'See More' }}
-                </button>
-              </span>
-            </p>
-            <div class="text-center">
-              <!-- Use Angular routing to navigate -->
-              <a   (click)="updateNote(n.noteId, n.title,i)"  class="btn btn-primary btn-sm custom-margin">Edit</a>
-              <a   (click)="confirmDelete(n.noteId)" class="btn btn-danger btn-sm ml-2 custom-margin">Delete</a>
-              <a   (click)="saveNotesAsPdf(i)" class="btn btn-primary btn-sm custom-margin">Download PDF</a>
-              <a   (click)="addNoteToFeed(i)" class="btn btn-primary btn-sm  custom-margin">Add to Feed</a>
-            </div>
+    <div class="col-md-12 mt-3" *ngFor="let n of notesPage?.content, let i = index">
+      <div class="card paint-card">
+        <div class="card-body">
+          <div class="text-center">
+
+            <img alt="" [src]="'/img/pp.jpg'" style="width: 50px; height: 50px;">
+          </div>
+
+          <h5>{{ n.title }}</h5>
+          <p>
+            {{ n.content.length > 100 ? (showFullContent[i] ? n.content : (n.content | slice:0:100) + '...') : n.content
+            }}
+            <br>
+            <span *ngIf="n.content.length > 100">
+              <button (click)="toggleContent(i)" class="btn btn-primary btn-sm">
+                {{ showFullContent[i] ? 'See Less' : 'See More' }}
+              </button>
+            </span>
+          </p>
+          <div class="text-center">
+            <!-- Use Angular routing to navigate -->
+            <a (click)="updateNote(n.noteId, n.title,i)" class="btn btn-primary btn-sm">Edit</a>
+            <a (click)="confirmDelete(n.noteId)" class="btn btn-danger btn-sm ml-2">Delete</a>
+            <a (click)="saveNotesAsPdf(i)" class="btn btn-primary btn-sm">Download PDF</a>
+            <a (click)="addNoteToFeed(i)" class="btn btn-primary btn-sm">Add to Feed</a>
           </div>
         </div>
       </div>
-<!-- 
-      <div class="row p-4">
-        <div class="col-md-4">Total Elements: {{ totalElement }}</div>
-        <div class="col-md-6">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              Replace Thymeleaf pagination logic with Angular pagination logic 
-              <li [class.disabled]="pageNo === 0" class="page-item">
-                <a class="page-link" routerLink="'/user/viewNotes/' + (pageNo - 1)" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li *ngFor="let i of totalPages" [class.active]="pageNo + 1 === i" class="page-item">
-                <a class="page-link" routerLink="'/user/viewNotes/' + (i - 1)" href="#">{{ i }}</a>
-              </li>
-              <li [class.disabled]="pageNo + 1 === totalPage" class="page-item">
-                <a class="page-link" routerLink="'/user/viewNotes/' + (pageNo + 1)" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    -->
     </div>
-  
 
-  </section>
+    <mat-paginator [length]="notesPage?.totalElements" [pageSize]="paginationRequest.size"
+      [pageIndex]="paginationRequest.page" [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChange($event)"></mat-paginator>
 
+  </div>
+
+
+</section>

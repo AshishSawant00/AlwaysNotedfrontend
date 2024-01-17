@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Notes } from '../model/Notes';
+import { PaginationRequest } from '../model/PaginationRequest';
+import { Page } from '../model/Page';
 
 
 @Injectable({
@@ -49,6 +51,17 @@ export class DataServiceService {
     // this.userUrl = 'http://localhost:8080/always-noted'
     this.userUrl = 'http://16.171.5.124:8080/notes'
 
+  }
+
+  pagination(paginationRequest: PaginationRequest, loggedInUserId: number): Observable<Page<Notes>> {
+    const params = new HttpParams()
+      .set('size', paginationRequest.size.toString())
+      .set('page', paginationRequest.page.toString())
+      .set('search', paginationRequest.search || '')
+      .set('sort', paginationRequest.sort || '')
+      .set('order', paginationRequest.order || '');
+
+    return this.http.post<Page<Notes>>(`${this.userUrl}/pagination?loggedInUserId=${loggedInUserId}`, paginationRequest, { params });
   }
 
   saveNotesAsPdf(notes: Notes): Observable<Blob> {
@@ -155,9 +168,5 @@ export class DataServiceService {
   getSharedObject() {
     return this.sharedObject;
   }
-
-
-
-
 
 }
