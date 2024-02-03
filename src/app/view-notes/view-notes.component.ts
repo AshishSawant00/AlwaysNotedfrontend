@@ -101,37 +101,42 @@ export class ViewNotesComponent implements OnInit {
 
 
   
-  saveNotesAsPdf(i:number) {
-    console.log('Download PDF button clicked for note at index:', i);
+  saveNotesAsPdf(noteId:number) {
+    console.log('Download PDF button clicked for noteId:', noteId);
+      this.notes.forEach(e => {
+        if(e.noteId==noteId){
+          this.service.saveNotesAsPdf(e).subscribe(
 
-    this.service.saveNotesAsPdf(this.notes[i]).subscribe(
+            (pdfData) => {
+              console.log("Notes "+e.title);
+              
+      
+              const blob = new Blob([pdfData], { type: 'application/pdf' });
+      
+              const link = document.createElement('a');
+      
+              link.href = window.URL.createObjectURL(blob);
+      
+              link.download = 'notes.pdf';
+      
+              link.click();
+      
+            },
+      
+            (error) => {
+      
+              console.log("error in pdf download");
+      
+      
+            }
+      
+          );
+      
+      
+        }
 
-      (pdfData) => {
-        console.log("Notes "+this.notes[i].title+" i - "+i);
-        
-
-        const blob = new Blob([pdfData], { type: 'application/pdf' });
-
-        const link = document.createElement('a');
-
-        link.href = window.URL.createObjectURL(blob);
-
-        link.download = 'notes.pdf';
-
-        link.click();
-
-      },
-
-      (error) => {
-
-        console.log("error in pdf download");
-
-
+      });
       }
-
-    );
-
-  }
 
   showFullContent: boolean[] = [];
 
@@ -140,14 +145,20 @@ export class ViewNotesComponent implements OnInit {
   }
 
   updateNote(noteId: any, noteTitle: string, i: number) {
-    noteId = this.notes[i].noteId;
+    console.log("Note Id - "+ noteId + " note title - "+ noteTitle+" i- "+i);
+    
+    
 
-    this.service.setNoteId(this.notes[i].noteId);
-    console.log("Id from update  " + this.notes[i].content + "  " + this.notes[i].noteId);
+    this.service.setNoteId(noteId);
+    this.notes.forEach(e => {
+      if (e.noteId==noteId) {
+        this.service.setSharedObject(e);
+      }
+    });
 
-    this.service.setSharedObject(this.notes[i]);
+    
 
-    this.router.navigate(["/editNotes/" + this.notes[i].noteId])
+    this.router.navigate(["/editNotes/" + noteId])
   }
 
 

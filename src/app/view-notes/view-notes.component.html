@@ -41,7 +41,7 @@
             <!-- Use Angular routing to navigate -->
             <a (click)="updateNote(n.noteId, n.title,i)" class="btn btn-primary btn-sm  ">Edit</a>
             <a (click)="confirmDelete(n.noteId)" class="btn btn-danger btn-sm ml-2">Delete</a>
-            <a (click)="saveNotesAsPdf(i)" class="btn btn-primary btn-sm  ">Download PDF</a>
+            <a (click)="saveNotesAsPdf(n.noteId)" class="btn btn-primary btn-sm  ">Download PDF</a>
             <a (click)="addNoteToFeed(i)" class="btn btn-primary btn-sm  ">Add to Feed</a>
           </div>
         </div>
