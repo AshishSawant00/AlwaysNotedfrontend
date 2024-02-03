@@ -13,7 +13,7 @@ import { Page } from '../model/Page';
 })
 export class DataServiceService {
 
-  private userUrl: string;
+  private userUrl: string ;
 
   private nameSource = new BehaviorSubject<string>('');
   currentName = this.nameSource.asObservable();
@@ -49,7 +49,8 @@ export class DataServiceService {
 
   constructor(private http: HttpClient) {
      this.userUrl = 'http://localhost:8080/always-noted'
-   // this.userUrl = 'http://16.171.5.124:8080/notes'
+ // this.userUrl = 'http://13.232.162.181:8080/notes/'
+ // this.userUrl = 'http://13.201.44.201:8080/notes/'
 
   }
 

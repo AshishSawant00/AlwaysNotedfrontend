@@ -102,10 +102,13 @@ export class ViewNotesComponent implements OnInit {
 
   
   saveNotesAsPdf(i:number) {
+    console.log('Download PDF button clicked for note at index:', i);
 
     this.service.saveNotesAsPdf(this.notes[i]).subscribe(
 
       (pdfData) => {
+        console.log("Notes "+this.notes[i].title+" i - "+i);
+        
 
         const blob = new Blob([pdfData], { type: 'application/pdf' });
 
@@ -156,6 +159,7 @@ export class ViewNotesComponent implements OnInit {
 
 
   deleteNote(noteId: number) {
+    console.log('Delete button clicked for noteId:', noteId);
 
     this.service.deleteNote(noteId).subscribe(e => {
       this.deleteMsg = e;
@@ -168,6 +172,8 @@ export class ViewNotesComponent implements OnInit {
   }
 
   addNoteToFeed(i:number){
+    console.log('Add to Feed button clicked for note at index:', i);
+
     this.notes[i].toFeed = true;
     console.log("Note  "+ this.notes[i].noteId);
     
